@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-1"
 
   default_tags {
     tags = {
@@ -19,7 +19,7 @@ module "vpc" {
   name = "main-vpc"
   cidr = "10.0.0.0/16"
 
-  azs                  = ["us-west-2a", "us-west-2b", "us-west-2c"]
+  azs                  = ["us-east-1a", "us-east-1b", "us-east-1c"]
   public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
   enable_dns_hostnames = true
   enable_dns_support   = true
