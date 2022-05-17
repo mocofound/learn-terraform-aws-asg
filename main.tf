@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-2"
+  region = "us-west-2"
 
   default_tags {
     tags = {
@@ -8,9 +8,9 @@ provider "aws" {
   }
 }
 
-data "aws_availability_zones" "available" {
-  state = "available"
-}
+#data "aws_availability_zones" "available" {
+#  state = "available"
+#}
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -19,12 +19,13 @@ module "vpc" {
   name = "main-vpc"
   cidr = "10.0.0.0/16"
 
-  azs                  = data.aws_availability_zones.available.names
+  azs                  = ["us-west-2a", "us-west-2b", "us-west-2c"]
   public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
   enable_dns_hostnames = true
   enable_dns_support   = true
 }
 
+/*
 data "aws_ami" "amazon-linux" {
   most_recent = true
   owners      = ["amazon"]
@@ -34,6 +35,7 @@ data "aws_ami" "amazon-linux" {
     values = ["amzn-ami-hvm-*-x86_64-ebs"]
   }
 }
+  */
 
 resource "aws_launch_configuration" "terramino" {
   name_prefix     = "learn-terraform-aws-asg-"
